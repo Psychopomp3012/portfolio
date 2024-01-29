@@ -5,24 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio</title> <!--(a).Title-->
-    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body bgcolor="purple"> <!--E8BEAC--> <!--(b).background--> <!--inline CSS-->
-    <h1>Portfolio</h1>
-    <h2>Hi,<br>Myself Sachin Diwakar</h2>
-    <h3 id="intro">I'm a Web-Developer</h3> <!--(d).Headline-->
-    <nav><b>Click to jump to the section</b>
-        <ol>
-            <!--(a)Internal Linking-->
-            <li><a href="#introduction">Intro</a></li>
-            <li><a href="#education">Education</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#links">Links</a></li>
-            <li><a href="#contact-info">Contact Info</a></li>
-        </ol>
-    </nav>
+    <!--Semantic-->
+    <header>
+        <h1>Portfolio</h1>
+        <h2>Hi,<br>Myself Sachin Diwakar</h2>
+        <h3 id="intro">I'm a Web-Developer</h3> <!--(d).Headline-->
+    </header>
+
+    <div>
+        <h3><u>Why this Website??</u></h3> <!--Website Description-->
+        <p>
+            This website, hosted on <a href="https://github.com/">GitHub</a>, showcase my depth of understanding of
+            Website development that I have acquired so far.
+            I was instructed to do so as well <b>:)</b>
+        </p>
+    </div>
+    <menu>
+        <nav><b>Click to jump to the section</b>
+            <ol>
+                <!--(a)Internal Linking-->
+                <li><a href="#introduction">Intro</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#links">Links</a></li>
+                <li><a href="#contact-info">Contact Info</a></li>
+            </ol>
+        </nav>
+    </menu>
+
     <div class="base" id="introduction">
         <h3><u>Intro</u></h3>
         <p>
@@ -92,16 +107,21 @@
         <p>
             <b>Phone No:</b> 89556XXXXX<br>
             <b>Email-ID:</b> <a href="mailto:diwakar.sachinXXXX@gmail.com">diwakar.sachinXXXX@gmail.com</a> / <a
-                href="mailto:sachin.diwakar2022@vitstudent.ac.in">sachin.diwakar2022@vitstudent.ac.in</a>          <!--(d) Email as link-->
+                href="mailto:sachin.diwakar2022@vitstudent.ac.in">sachin.diwakar2022@vitstudent.ac.in</a>
+            <!--(d) Email as link-->
         </p>
     </div>
 
-    <section>
+    <aside>
+        <a href="">CLICK HERE</a> to go ahead
+    </aside>
+
+    <footer>
         <section id="box1"></section>
         <section id="box2"></section>
         <section id="box3"></section>
         <section id="box4"></section>
-    </section>
+    </footer>
 
     <style>
         body,
