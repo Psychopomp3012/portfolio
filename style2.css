@@ -38,11 +38,6 @@ p {
     left: 40%;
 }
 
-body {
-    background-image: url("https://github.com/Psychopomp3012/portfolio/blob/main/background_image.jpg"); /*3.(b)*/
-    overflow-x: hidden;
-}
-
 #myphoto, #p1{
     display: inline-block;
 }
