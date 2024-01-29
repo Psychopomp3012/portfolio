@@ -39,7 +39,7 @@ p {
 }
 
 body {
-    background-image: url("images/background_image.jpg"); /*3.(b)*/
+    background-image: url("background_image.jpg"); /*3.(b)*/
     overflow-x: hidden;
 }
 
