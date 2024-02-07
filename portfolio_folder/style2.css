@@ -131,26 +131,27 @@ ul {
     text-transform: uppercase;
     letter-spacing: 3px;
     padding: 15px 15px 15px 15px;
+    margin: 20px 0px 20px 0px;
     font-size: 20px;
     font-weight: 700;
     transition: 0.5s;
     background-color: black;/*rgb(28, 219, 108);#2de0f0;*/
     color: white;
-    border: 3px solid white;
+    border: 3px solid rgb(127, 132, 4);
 }
 
 .button:hover {
     letter-spacing: 8px;
-    background: #1e9bff;
-    box-shadow: 0px 0px 30px #1e9bff;
+    background: #e1c62c;
+    box-shadow: 0px 0px 30px #e1c62c;
     cursor: pointer;
 }  
 
 .span1:before {
     content: ">>";
-    color:rgb(5, 45, 49);
+    color: rgb(21, 64, 184);
 }
 .span1:after {
     content: "<<";
-    color: rgb(5, 45, 49);
+    color: rgb(21, 64, 184);
 }
