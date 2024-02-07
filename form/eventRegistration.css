@@ -20,6 +20,7 @@ form {
 
 body {
     background-image: url(background.jpg);
+    background-size: cover;
     background-color: #3aafa9;
     display: grid;
     place-items: center;
