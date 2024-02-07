@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="eventRegistration.css">
+    </head>
+    <body>
+        <h1 class="head">Webinar Form:</h1>
+        <form>
+            
+            <div class="block grid1">
+                <label for="full-name" class="inline">Full name:</label>
+                <input type="text" id="full-name" class="inline" required>
+            </div>
+
+            <div class="block grid1">
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="block grid1">
+                <label for="phone-no">Phone no:</label>
+                <input type="number" id="phone-no" required>
+            </div>
+            
+            <div class="block grid1">
+                <label for="education-label">Education Level:</label>
+                <select id="education-label" class="">
+                    <option>10th</option>
+                    <option>12th</option>
+                    <option>Bachelors</option>
+                    <option>Masters</option>
+                    <option>Post Graduate</option>
+                </select>
+            </div>
+            
+            <div class="block grid1">
+                <label for="company">Company/Organization:</label>
+                <input type="text" id="Company" required>
+            </div>
+
+            <hr> <!--1st break-->
+
+            <fieldset>
+                <legend>We offer webinar for following courses.<br>
+                    Tick the ones you are interested in...</legend>
+                    <label class="block">
+                        <input type="checkbox" name="course" required>
+                        C/C++/Python Programming
+                    </label>
+                    <label class="block">
+                        <input type="checkbox" name="course">
+                        Website-Development(Front-end only)
+                    </label>
+                    <label class="block">
+                        <input type="checkbox" name="course">
+                        Website-Development(Back-end only)
+                    </label>
+                    <label class="block">
+                        <input type="checkbox" name="course">
+                        Website-Development(Full-stack)
+                    </label>
+                    <label class="block">
+                        <input type="checkbox" name="course">
+                        App-Development(using Flutter)
+                    </label>
+                    <label class="block">
+                        <input type="checkbox" name="course">
+                        AI-ML
+                    </label>
+                    
+            </fieldset>
+
+            <div class="block grid1">
+                <label for="webinar-date">Date of Webinar:</label>
+                <input type="date" id="webinar-date">
+            </div>
+
+
+            <fieldset>
+                <legend>Time-slot:</legend>
+                <label class="block">
+                    <input type="radio" name="time-slot" required>
+                    Morning 8:00 - 9:00
+                </label>
+                <label class="block">
+                    <input type="radio" name="time-slot">
+                    Afternoon 13:00 - 14:00
+                </label>
+                <label class="block">
+                    <input type="radio" name="time-slot">
+                    Evening 17:00 - 18:00
+                </label>
+            </fieldset>
+            
+            <div class="block">
+                <label for="promotion-analytics">How did you knew about this Webinar:</label>
+                <select id="promotion-analytics">
+                    <option>Social Media</option>
+                    <option>Relatives/Friends</option>
+                    <option>Television</option>
+                    <option>Search Engine</option>
+                    <option>Others</option>
+                    <option>I'd rather not say</option>
+                </select>
+            </div>
+
+            <hr>
+            
+            <div class="block">
+                <label>
+                    <input type="checkbox" required>
+                    I accept the <a href="">terms & conditions</a>
+                </label>
+            </div>
+            
+            <div class="block buttons">
+                <input type="submit">
+                <input type="reset">
+            </div>
+            
+        </form>
+    </body>
+
+    <!--
+        Conclusion:
+        label with for attribute for text-fields
+        surround input with label for radio
+    -->
+</html>
