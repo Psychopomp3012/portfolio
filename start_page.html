@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start page</title>
+    <style>
+        body {
+            background-color: black;
+        }
+        .button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            color: black;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 15px 15px 15px 15px;
+            font-size: 20px;
+            font-weight: 700;
+            transition: 0.5s;
+            background-color: black;/*rgb(28, 219, 108);#2de0f0;*/
+            color: white;
+            border: 3px solid white;
+        }
+        
+        .button:hover {
+            letter-spacing: 8px;
+            background: #1e9bff;
+            box-shadow: 0px 0px 30px #1e9bff;
+            cursor: pointer;
+        }  
+
+        .button:before {
+            content: "";
+        }
+
+        .span1:before {
+            content: ">>";
+            color:rgb(5, 45, 49);
+        }
+        .span1:after {
+            content: "<<";
+            color: rgb(5, 45, 49);
+        }
+
+        </style>
+</head>
+<body>
+    <a href="portfolio_folder\index.html"><button class="button"><span class="span1">Click</span><br> to Start</button></a>
+</body>
+</html>
