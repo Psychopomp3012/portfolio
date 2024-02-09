@@ -112,7 +112,7 @@ input[type="submit"]:hover, input[type="reset"]:hover {
     font-size: 20px;
     font-weight: 700;
     transition: 0.5s;
-    background-color: rgb(12, 206, 25);/*rgb(28, 219, 108);#2de0f0;*/
+    background-color: black;/*rgb(28, 219, 108);#2de0f0;*/
     color: white;
     border: 3px solid white;
 }
@@ -123,6 +123,10 @@ input[type="submit"]:hover, input[type="reset"]:hover {
     box-shadow: 0px 0px 30px #1e9bff;
     cursor: pointer;
 }  
+
+span {
+    color: #3c4f04;
+}
 
 .span1:before {
     content: ">>";
