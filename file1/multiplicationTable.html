@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+    <link rel="stylesheet" href="multiplicationTable.css">
+</head>
+<body>
+
+    <script>
+
+
+        function multiplicationTable(num) {
+            if (num > 20 || num < 1) alert("Please input any Integer between 1 and 20.")
+            else {
+                document.write("<h1>Multiplication Table:</h1>");
+                document.write("<div class='table'>");
+                for (let i = 1; i <= 10; i++) {
+                    for (let j = 1; j <= num; j++) {
+                        document.write("<p>" + i*j + "</p>");
+                    }
+                    document.write("<br>");
+                }
+                document.write("</div>");
+            }
+        }
+
+        var num = prompt("Enter the number till Multiplication table(till 20): ");
+        multiplicationTable(parseInt(num));
+    </script>
+
+    <a href="../ageCheck.html"><button class="button2"><span class="span1">Head</span><br> to ageCheck</button></a>
+
+</body>
+</html>
