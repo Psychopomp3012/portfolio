@@ -24,6 +24,7 @@
             background-color: black;/*rgb(28, 219, 108);#2de0f0;*/
             color: white;
             border: 3px solid white;
+            z-index: 1;
         }
         
         .button:hover {
@@ -45,10 +46,74 @@
             content: "<<";
             color: rgb(5, 45, 49);
         }
-
+        .circle {
+            position: fixed;
+            --circle-size: 50px;
+            width: var(--circle-size);
+            height: var(--circle-size);
+            border-radius: 100%;
+            border: 3px solid white;
+            top: calc(var(--circle-size) / 2 * -1);
+            left: calc(var(--circle-size) / 2 * -1);
+            z-index: 0;
+        }
         </style>
 </head>
 <body>
     <a href="portfolio_folder\index.html"><button class="button"><span class="span1">Click</span><br> to Start</button></a>
+
+    <div class="circle" id="circle"></div>
+
+    <script>
+        const circle = document.getElementById("circle");
+        const mouse = {x:0, y:0};
+        const previousMouse = {x:0, y:0};
+        const circlePosition = {x:0, y:0};
+        const speed = 0.12;
+        let currentScale = 0;
+        let currentAngle = 0;
+
+        window.addEventListener("mousemove", (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        const tick = () => {
+            circlePosition.x += (mouse.x - circlePosition.x) * speed;
+            circlePosition.y += (mouse.y - circlePosition.y);
+
+            const translateTransform = `translate(${circlePosition.x}px, ${circlePosition.y}px)`;
+
+            // distance between mouse and previousMouse
+
+            const deltaMouseX = mouse.x - previousMouse.x;
+            const deltaMouseY = mouse.y - previousMouse.y;
+
+            previousMouse.x = mouse.x;
+            previousMouse.y = mouse.y;
+
+            const mouseVelocity = Math.min(Math.sqrt(deltaMouseX**2 + deltaMouseY**2) * 4, 150);  // To keep the output value within a reasonable range
+            const scaleValue = (mouseVelocity / 150) * 0.5;
+
+            currentScale += (scaleValue - currentScale) * speed;
+
+            const scaleTransform = `scale(${1 + currentScale}, ${1 - currentScale})`;
+
+            const angle = Math.atan2(deltaMouseY, deltaMouseX) * 180 / Math.PI;
+
+            if (mouseVelocity > 20) {
+                currentAngle = angle;
+            }
+
+            const rotateTransform = `rotate(${angle}deg)`;
+
+            circle.style.transform = `${translateTransform} ${rotateTransform} ${scaleTransform}`;
+
+            window.requestAnimationFrame(tick);
+        }
+
+        tick();
+
+    </script>
 </body>
 </html>
