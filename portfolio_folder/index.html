@@ -1,55 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
 <!--22BKT0079   SACHIN DIWAKAR   VIT-->    
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title> <!--(a).Title-->
+    <title>Portfolio</title>
     <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
 </head>
 
-<body bgcolor="purple"> <!--E8BEAC--> <!--(b).background--> <!--inline CSS-->
-    <!--Semantic-->
-    <header>
-        <h1>Portfolio</h1>
-        <h2>Hi,<br>Myself Sachin Diwakar</h2>
-        <h3 id="intro">I'm a Web-Developer</h3> <!--(d).Headline-->
-    </header>
+<body> 
 
-    <div>
-        <h3><u>Why this Website??</u></h3> <!--Website Description-->
-        <p>
+    <div class="preloader"></div>
+
+    <div class="header">
+        <h1>Portfolio2.0</h1>
+        <h2 class="intro">Hello There,<br>I am Sachin Diwakar</h2>
+        <h3 class="intro">I'm a Web-Developer</h3>
+    </div>
+    
+    <div class="nav">
+        <a href="#introduction" class="navItem">Intro</a>
+        <a href="#education" class="navItem">Education</a>
+        <a href="#skills" class="navItem">Skills</a>
+        <a href="#experience" class="navItem">Experience</a>
+        <a href="#links" class="navItem">Links</a>
+        <a href="#contact-info" class="navItem">Contact Info</a>
+    </div>
+
+    <div class="reason">
+        <h2 class="reasonQuestion"><u>Why this Website??</u></h3> 
+        <p class="reasonAnswer">
             This website, hosted on <a href="https://github.com/">GitHub</a>, showcase my depth of understanding of
             Website development that I have acquired so far.
             I was instructed to do so as well <b>:)</b>
         </p>
     </div>
-    <menu>
-        <nav><b>Click to jump to the section</b>
-            <ol>
-                <!--(a)Internal Linking-->
-                <li><a href="#introduction">Intro</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#links">Links</a></li>
-                <li><a href="#contact-info">Contact Info</a></li>
-            </ol>
-        </nav>
-    </menu>
 
-    <div class="base" id="introduction">
-        <h3><u>Intro</u></h3>
+    <div class="container" id="introduction">
+        <h2 class="description"><u>Intro</u></h2>
         <p>
             I am currently a second-year student at VIT, Vellore.<br>
             Likes/Hobbies: coding, playing badminton, strumming guitar, jogging
         </p>
     </div>
 
-    <div class="base" id="education">
-        <h3><u>Education</u></h3>
+    <div class="container" id="education">
+        <h2 class="description"><u>Education</u></h2>
         <table border="1">
             <tr>
                 <th>10th:</th>
@@ -66,15 +67,15 @@
         </table>
     </div>
 
-    <div class="base" id="skills">
-        <h3><u>Skills</u></h3>
+    <div class="container" id="skills">
+        <h2 class="description"><u>Skills</u></h2>
         <p>Learned Python, C, C++, Java<br>
             Object-oriented Programming using vanilla JavaScript<br>
             Game-development using HTML-CSS-JS.</p>
     </div>
 
-    <div class="base" id="experience">
-        <h3><u>Experience</u></h3>
+    <div class="container" id="experience">
+        <h2 class="description"><u>Experience</u></h2>
         <table border="1">
             <tr>
                 <th>2022 Winter:</th>
@@ -95,44 +96,35 @@
         </table>
     </div>
 
-    <div class="base" id="links">
-        <h3><u>Links:</u></h3>
-        <ul>
-            <!--(b)External Linking-->
-            <li><a href="https://www.linkedin.com/in/sachin-diwakar-ab0248252/" target="_blank">LinkedIn</a><br></li>
-            <li><a href="https://github.com/Psychopomp3012">GitHub</a></li>
-        </ul>
+    <div class="container" id="links">
+        <h2 class="description"><u>Links:</u></h2>
+        <a href="https://www.linkedin.com/in/sachin-diwakar-ab0248252/" target="_blank" class="extLinks"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://github.com/Psychopomp3012" target="_blank" class="extLinks"><i class="fa-brands fa-github"></i></a>
     </div>
 
-    <div class="base" id="contact-info">
-        <h3><u>Contact Info:</u></h3>
+    <div class="container" id="contact-info">
+        <h2 class="description"><u>Contact Me:</u></h2>
         <p>
             <b>Phone No:</b> 89556XXXXX<br>
             <b>Email-ID:</b> <a href="mailto:diwakar.sachinXXXX@gmail.com">diwakar.sachinXXXX@gmail.com</a> / <a
                 href="mailto:sachin.diwakar2022@vitstudent.ac.in">sachin.diwakar2022@vitstudent.ac.in</a>
-            <!--(d) Email as link-->
         </p>
+
     </div>
 
-    <aside>
-        <a href="about.html">CLICK HERE</a> to go ahead
-    </aside>
+    
+    <a href="about.html" class="button">CLICK HERE</a> to go ahead
 
-    <footer>
-        <section id="box1"></section>
-        <section id="box2"></section>
-        <section id="box3"></section>
-        <section id="box4"></section>
-    </footer>
+    <script>
+        window.addEventListener("load", () => {
+            const loader = document.querySelector(".preloader");
+            loader.classList.add("preloader--hidden");
 
-    <style>
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-        }
-    </style>
-
+            loader.addEventListener("transitionend", () => {
+                document.body.removeChild(loader);
+            });
+        });
+    </script>
 </body>
 
 </html>
