@@ -9,22 +9,65 @@
 
   /* #101820, #FEE715 */
 
+:root {
+    --blue: #1e90ff;
+    --white: #ffffff;
+}
+
+@keyframes navAnimation {
+    0% {
+        background: linear-gradient(135deg, white 16.67%, var(--blue));
+    }
+    20% {
+        background: linear-gradient(135deg, var(--blue) 16.67%, white 16.67%, var(--blue));
+    }
+    40% {
+        background: linear-gradient(135deg, var(--blue) 33.34%, white 16.67%, var(--blue));
+    }
+
+    60% {
+        background: linear-gradient(135deg, var(--blue) 50.01%, white 16.67%, var(--blue));
+    }
+    80%  {
+        background: linear-gradient(135deg, var(--blue) 66.68%, white 16.67%, var(--blue));
+    }
+    100% {
+        background: linear-gradient(135deg, var(--blue) 83.35%, white 16.67%);
+    }
+}
+
 * {
     padding: 0;
     margin: 0;
-    /* font-weight: 500; */
     font-style: normal;
 }
 body {
     background-color: black;            /*#101820; 2b00d4*/
     /* background: linear-gradient(90deg, red, rgb(156, 9, 169)); */
 }
+a.backbutton {
+    width: 80px;
+    height: 62.6px;
+    background-color: gray;
+    position: absolute;
+    font-size: 60px;
+    color: white;
+    display: flex;
+    padding: 5px 0px 10px 20px;
+}
+a.backbutton:hover {
+    background-color: white;
+    color: gray;
+}
 h1 {
     /* background-color: rgba(0, 255, 255, 0.285); */
     background-color: #FEE715;
     text-align: center;
+    width: 100%;
     padding: 20px 0px 20px 0px;
-    margin: 0px 0px 0px 0px;
+}
+a.backbutton, h1 {
+    display: inline-block;
 }
 h2.intro {
     background-color: aqua;
@@ -67,6 +110,14 @@ a.navItem {
     margin: 0px 0px 0px 0px;
     text-align: center;
     font: 18px sans-serif;
+}
+a.navItem:active {
+    background-color: red;
+    animation: navAnimation 0.2s ease-in-out 0s 1 normal backwards;
+    cursor: pointer;
+}
+.shinyAnimation {
+    animation: navAnimation 0.8s ease-in-out 0s 1 normal backwards;
 }
 .nav {
     /* width: 100%; */
@@ -181,4 +232,34 @@ a.button:hover {
     color: black;
     background: #1e9bff;
     box-shadow: 0px 0px 30px #1e9bff;
+}
+
+/* Back to top arrow */
+
+a.backToTopArrow {
+    font-size: 60px;
+    color: white;
+    position: fixed;
+    bottom: 10vh;
+    right: 15vw;
+    opacity: 0;
+}
+a.backToTopArrow:hover {
+    cursor: pointer;
+    color: orange;
+    opacity: 1;
+}
+a.arrowActive {
+    animation-name: topArrow;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes topArrow {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
