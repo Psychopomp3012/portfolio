@@ -17,7 +17,8 @@
 
     <div class="preloader"></div>
 
-    <div class="header">
+    <div class="header" id="header">
+        <a href="../portfolio" class="backbutton"><i class="fa fa-arrow-left" aria-hidden="true"></i></a>
         <h1>Portfolio2.0</h1>
         <h2 class="intro">Hello There,<br>I am Sachin Diwakar</h2>
         <h3 class="intro">I'm a Web-Developer</h3>
@@ -29,7 +30,7 @@
         <a href="#skills" class="navItem">Skills</a>
         <a href="#experience" class="navItem">Experience</a>
         <a href="#links" class="navItem">Links</a>
-        <a href="#contact-info" class="navItem">Contact Info</a>
+        <a href="#contactInfo" class="navItem">Contact Info</a>
     </div>
 
     <div class="reason">
@@ -102,7 +103,7 @@
         <a href="https://github.com/Psychopomp3012" target="_blank" class="extLinks"><i class="fa-brands fa-github"></i></a>
     </div>
 
-    <div class="container" id="contact-info">
+    <div class="container" id="contactInfo">
         <h2 class="description"><u>Contact Me:</u></h2>
         <p>
             <b>Phone No:</b> 89556XXXXX<br>
@@ -112,18 +113,110 @@
 
     </div>
 
+    <a class="backToTopArrow"><i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
+
     
     <a href="about.html" class="button">CLICK HERE</a> to go ahead
 
     <script>
+        // loading page
         window.addEventListener("load", () => {
             const loader = document.querySelector(".preloader");
             loader.classList.add("preloader--hidden");
 
             loader.addEventListener("transitionend", () => {
-                document.body.removeChild(loader);
+                if (document.body.contains(loader)) {  // checks for child
+                    document.body.removeChild(loader);
+                }
             });
         });
+
+        // shiny effect
+
+        preventInternal("navItem");
+
+        const navigationBar = document.querySelector(".nav");
+        navigationBar.addEventListener("click", (event) => {
+            regex = /#(\w+)/;
+            const correspondingHref = event.target.href;
+            let navSelectedID = regex.exec(correspondingHref)[1];
+        
+            window.scrollTo ({
+                top: centerCoordinates(navSelectedID),
+                behavior: "smooth"
+            });
+
+            shiny(navSelectedID);
+
+        });
+
+        // scroll check
+
+        function centerCoordinates(elementID) {  // give element-ID as argument
+
+            const test = document.getElementById(elementID);
+            let deviceHeight = window.innerHeight;  
+            let elementHeight = test.clientHeight;  
+            let elementTop = test.offsetTop;  // with respect to parent
+            // let elementTop = test.getBoundingClientRect().top + window.pageYOffset;
+
+            let coordinate = parseFloat(elementTop - (deviceHeight/2 - elementHeight/2));
+
+            return coordinate;
+
+        }
+
+        function preventInternal(className) {
+            //prevent default
+
+            const internalLink = document.getElementsByClassName(className);
+            let counter = 0;
+
+            while (counter < 5) {
+                internalLink[counter].addEventListener("click", function (event) {
+                    event.preventDefault(); // Prevent the default scroll behavior
+                });
+                counter++;
+            }
+        }
+
+        function shiny(elementID) {
+            const correspondingContainer = document.getElementById(elementID);
+            // Assuming that it has only 2 children
+            const childElement1 = correspondingContainer.children[0];
+            const childElement2 = correspondingContainer.children[1];
+
+            console.log(correspondingContainer.children);
+
+            childElement1.classList.remove("shinyAnimation");
+            childElement2.classList.remove("shinyAnimation");
+            correspondingContainer.classList.remove("shinyAnimation");
+
+            void correspondingContainer.offsetWidth;
+
+            childElement1.classList.add("shinyAnimation");
+            childElement2.classList.add("shinyAnimation");
+            correspondingContainer.classList.add("shinyAnimation");
+        }
+        
+        const arrow = document.getElementsByClassName("backToTopArrow")[0];
+        
+        arrow.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        window.addEventListener("scroll", () => {
+            if (window.pageYOffset > 400) {
+                arrow.classList.add("arrowActive");
+            }
+            else {
+                arrow.classList.remove("arrowActive");
+            }
+        });
+        
     </script>
 </body>
 
