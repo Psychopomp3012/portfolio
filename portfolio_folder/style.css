@@ -245,9 +245,7 @@ a.backToTopArrow {
     opacity: 0;
 }
 a.backToTopArrow:hover {
-    cursor: pointer;
     color: orange;
-    opacity: 1;
 }
 a.arrowActive {
     animation-name: topArrow;
@@ -261,5 +259,6 @@ a.arrowActive {
     }
     to {
         opacity: 1;
+        cursor: pointer;
     }
 }
