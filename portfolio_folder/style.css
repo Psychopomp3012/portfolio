@@ -117,7 +117,7 @@ a.navItem:active {
     cursor: pointer;
 }
 .shinyAnimation {
-    animation: navAnimation 0.8s ease-in-out 0s 1 normal backwards;
+    animation: navAnimation 0.4s linear 0s 1 normal backwards;
 }
 .nav {
     /* width: 100%; */
