@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <title>Webinar Form</title>
         <link rel="stylesheet" href="eventRegistration.css">
     </head>
     <body>
@@ -10,7 +11,12 @@
             
             <div class="block grid1">
                 <label for="full-name" class="inline">Full name:</label>
-                <input type="text" id="full-name" class="inline" required>
+                <input type="text" id="full-name" class="inline" placeholder="Alphabets only(5 - 20)" required>
+            </div>
+
+            <div class="block grid1">
+                <label for="age">Age:</label>
+                <input type="number" id="age" placeholder="18 - 100" required>
             </div>
 
             <div class="block grid1">
@@ -20,23 +26,24 @@
             
             <div class="block grid1">
                 <label for="phone-no">Phone no:</label>
-                <input type="number" id="phone-no" required>
+                <input type="text" id="phone-no" placeholder="10-digits" required>
             </div>
             
             <div class="block grid1">
-                <label for="education-label">Education Level:</label>
-                <select id="education-label" class="">
-                    <option>10th</option>
-                    <option>12th</option>
-                    <option>Bachelors</option>
-                    <option>Masters</option>
-                    <option>Post Graduate</option>
+                <label for="education-level">Education Level:</label>
+                <select id="education-level" class="" required>
+                    <option disabled selected value="" class="education">(Choose One)</option>
+                    <option class="education">10th</option>
+                    <option class="education">12th</option>
+                    <option class="education">Bachelors</option>
+                    <option class="education">Masters</option>
+                    <option class="education">Post Graduate</option>
                 </select>
             </div>
             
             <div class="block grid1">
                 <label for="company">Company/Organization:</label>
-                <input type="text" id="Company" required>
+                <input type="text" id="company" required>
             </div>
 
             <hr> <!--1st break-->
@@ -44,27 +51,27 @@
             <fieldset>
                 <legend>We offer webinar for following courses.<br>
                     Tick the ones you are interested in...</legend>
-                    <label class="block">
-                        <input type="checkbox" name="course" required>
+                    <label class="block black">
+                        <input type="checkbox" name="course">
                         C/C++/Python Programming
                     </label>
-                    <label class="block">
+                    <label class="block black">
                         <input type="checkbox" name="course">
                         Website-Development(Front-end only)
                     </label>
-                    <label class="block">
+                    <label class="block black">
                         <input type="checkbox" name="course">
                         Website-Development(Back-end only)
                     </label>
-                    <label class="block">
+                    <label class="block black">
                         <input type="checkbox" name="course">
                         Website-Development(Full-stack)
                     </label>
-                    <label class="block">
+                    <label class="block black">
                         <input type="checkbox" name="course">
                         App-Development(using Flutter)
                     </label>
-                    <label class="block">
+                    <label class="block black">
                         <input type="checkbox" name="course">
                         AI-ML
                     </label>
@@ -73,21 +80,21 @@
 
             <div class="block grid1">
                 <label for="webinar-date">Date of Webinar:</label>
-                <input type="date" id="webinar-date">
+                <input type="date" id="webinar-date" max="2024-06-30" min="2024-03-15">
             </div>
 
 
             <fieldset>
                 <legend>Time-slot:</legend>
-                <label class="block">
-                    <input type="radio" name="time-slot" required>
+                <label class="block black">
+                    <input type="radio" name="time-slot">
                     Morning 8:00 - 9:00
                 </label>
-                <label class="block">
+                <label class="block black">
                     <input type="radio" name="time-slot">
                     Afternoon 13:00 - 14:00
                 </label>
-                <label class="block">
+                <label class="block black">
                     <input type="radio" name="time-slot">
                     Evening 17:00 - 18:00
                 </label>
@@ -109,19 +116,19 @@
             
             <div class="block">
                 <label>
-                    <input type="checkbox" required>
-                    I accept the <a href="">terms & conditions</a>
+                    <input type="checkbox" id="t&c">
+                    I accept the <a href="" id="t&c-link">terms & conditions</a>
                 </label>
             </div>
             
             <div class="block buttons">
-                <input type="submit">
+                <input type="submit" id="submit">
                 <input type="reset">
             </div>
 
         </form>
 
-        <a href="../file1\multiplicationTable.html"><button class="button"><span class="span1">Head</span><br> to <br>Multiplication Table</button></a>
+        <!-- <a href="../file1\multiplicationTable.html"><button class="button"><span class="span1">Head</span><br> to <br>Multiplication Table</button></a> -->
         
     </body>
 
@@ -130,4 +137,100 @@
         label with for attribute for text-fields
         surround input with label for radio
     -->
+    <script>
+        let fullName, age, email, phoneNo, educationLevels, company, timings, date, courses, termsAndConditions;
+        let msg;
+        
+        function validateRadio(radioNodeContainer) {
+            for (let i = 0; i < radioNodeContainer.length; i++) {
+                if (radioNodeContainer[i].checked) return true;
+            }
+            return false;
+        }
+        function validateCheckbox(checkboxNodeContainer) {
+            for (let i = 0; i < checkboxNodeContainer.length; i++) {
+                if (checkboxNodeContainer[i].checked) return true;
+            }
+            return false;
+        }
+        function validateSelect(selectNodeContainer) {
+            for (let i = 1; i < selectNodeContainer.length; i++) {  // i = 1 as 1st one is already selected
+                if (selectNodeContainer[i].selected) return true;
+            }
+            return false;
+        }
+        function validate(fullName, age, email, phoneNo, educationLevels, timings, date, courses, termsAndConditions) {
+
+            let errormsg = "";
+            fullNameRegex = /^[A-za-z ]{5,20}$/;
+            msg = (fullNameRegex.test(fullName)) ? "fine" : "Please enter name in specified format.";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += msg;
+
+            ageRegex = /^(18|19|[2-9][0-9]|100)$/;
+            msg = (ageRegex.test(age)) ? "fine" : "Age must be within range to attend webinar.";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += ("\n" + msg);
+
+            emailRegex = /^([A-Za-z][A-Za-z0-9_\.]*)@([A-Za-z0-9_]+)\.([A-Za-z]+)$/;
+            msg = (emailRegex.test(email)) ? "fine" : "Please enter a valid email.";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += ("\n" + msg);
+
+            phoneNumberRegex = /^([0-9]{10})$/;
+            msg = (phoneNumberRegex.test(phoneNo)) ? "fine" : "Please enter a valid phone number.";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += ("\n" + msg);
+
+            msg = (validateSelect(educationLevels)) ? "fine" : "Please select your education level";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += ("\n" + msg);
+
+            msg = (validateCheckbox(courses)) ? "fine" : "Please select atleast one course.";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += ("\n" + msg);
+
+            msg = (date !== "") ? "fine" : "Please select the date of webinar.";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += ("\n" + msg);
+
+            msg = (validateRadio(timings)) ? "fine" : "Please select a timing.";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += ("\n" + msg);
+
+            msg = (termsAndConditions.checked) ? "fine" : "Please accept our terms & conditions.";
+            // if(msg !== "fine") alert(msg);
+            if(msg !== "fine") errormsg += ("\n" + msg);
+
+            if (errormsg !== "") alert(errormsg);
+            else alert("FORM SUBMITTED");
+        }
+
+        let sub = document.getElementById("submit");
+        sub.addEventListener("click", (event) => {
+            event.preventDefault();
+            fullName = document.getElementById("full-name").value;
+            age = document.getElementById("age").value;
+            email = document.getElementById("email").value;
+            phoneNo = document.getElementById("phone-no").value;
+            educationLevels = document.getElementsByClassName("education");
+            console.log(educationLevels);
+            company = document.getElementById("company").value;
+            date = document.getElementById("webinar-date").value;
+            timings = document.getElementsByName("time-slot");
+            courses = document.getElementsByName("course");
+            termsAndConditions = document.getElementById("t&c");
+
+            
+            validate(fullName, age, email, phoneNo, educationLevels, timings, date, courses, termsAndConditions);
+        });
+
+        // t&c link won't erase the form data on clicking
+
+        const termsAndConditionsLink = document.getElementById("t&c-link");
+        termsAndConditionsLink.addEventListener("click", (event) => {
+            event.preventDefault();
+        });
+
+    </script>
 </html>
