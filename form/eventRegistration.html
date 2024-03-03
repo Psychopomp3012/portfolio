@@ -6,6 +6,8 @@
         <link rel="stylesheet" href="eventRegistration.css">
     </head>
     <body>
+        <div class="preloader"></div>
+
         <h1 class="head">Webinar Form:</h1>
         <form>
             
@@ -117,13 +119,13 @@
             <div class="block">
                 <label>
                     <input type="checkbox" id="t&c">
-                    I accept the <a href="" id="t&c-link">terms & conditions</a>
+                    I accept the <a href="" id="t&c-link" class="TandC">terms & conditions</a>
                 </label>
             </div>
             
             <div class="block buttons">
-                <input type="submit" id="submit">
                 <input type="reset">
+                <input type="submit" id="submit">
             </div>
 
         </form>
@@ -230,6 +232,18 @@
         const termsAndConditionsLink = document.getElementById("t&c-link");
         termsAndConditionsLink.addEventListener("click", (event) => {
             event.preventDefault();
+        });
+
+        // loading page
+        window.addEventListener("load", () => {
+            const loader = document.querySelector(".preloader");
+            loader.classList.add("preloader--hidden");
+
+            loader.addEventListener("transitionend", () => {
+                if (document.body.contains(loader)) {  // checks for child
+                    document.body.removeChild(loader);
+                }
+            });
         });
 
     </script>
