@@ -5,8 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Start page</title>
     <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
         body {
             background-color: black;
+            overflow-x: hidden;
         }
         .button {
             position: absolute;
@@ -57,12 +62,97 @@
             left: calc(var(--circle-size) / 2 * -1);
             z-index: 0;
         }
+        div.index {
+            position: relative;
+            top: 100vh;
+            width: 100%;
+            height: 100vh;
+            border-top: 1px solid blue;
+            background-color: #051421;
+            /* border: 1px solid white; */
+            /* opacity: 0; */
+        }
+        .index > h1 {
+            color: #35bcbf;
+            position: relative;
+            background-color: #263849;
+            width: 110px;
+            padding: 0px 30px 0px 30px;
+            border-radius: 5px;
+            box-shadow: 0px 0px 20px #00fbff;
+            margin: 20px 0px 20px 20px;
+            /* width: 30px; */
+            opacity: 0;
+        }
+        .scrollFadeAnimationClass {
+            animation: scrollFadeAnimation 1s ease-in-out 0s 1 normal forwards;
+            /* animation: name duration timing-function delay iteration-count direction fill-mode; */
+            /* animation-direction:; */
+            /* animation-fill-mode:; */
+        }
+        @keyframes scrollFadeAnimation {
+            
+            from {
+                opacity: 0;
+                left: 200px;
+            }
+            to {
+                opacity: 1;
+                left: 0px;
+            }
+
+        }
+        
+        div.index > a.link > img.image {
+            width: 300px;
+            position: relative;
+            left: 0px;
+            margin: 10px 10px 0px 20px;
+            padding: 10px 10px 10px 10px;
+            background-color: #263849;/*#90f6d7;*/
+            border-radius: 5px;
+            box-shadow: 0px 0px 20px #00fbff;
+            opacity: 0;
+        }
+        div.index > a.link > img.image:hover {
+            background-color: #484926;
+            box-shadow: 0px 0px 20px #aeb337;
+        } 
+        div.index > a.link > img.image:active {
+            background-color: rgb(234, 61, 61);
+            box-shadow: 0px 0px 20px rgb(234, 61, 61);
+        }
+        div.scrollDownText {
+            width: 100%;
+            /* background-color: red; */
+            color: white;
+            font-size: 40px;
+            position: absolute;
+            bottom: 0px;
+            text-align: center;
+            /* left: 26%; */
+            margin: 0px auto 10px auto;
+        }
         </style>
 </head>
 <body>
     <a href="portfolio_folder\index.html"><button class="button"><span class="span1">Click</span><br> to Start</button></a>
 
     <div class="circle" id="circle"></div>
+
+    <div class="scrollDownText">
+        &gt;&gt; Scroll Down &lt;&lt;<br>
+        to access index
+    </div>
+    <div class="index">
+        <h1 class="index">INDEX:</h1>
+
+        <a href="portfolio_folder\index.html" class="link"><img src="index_images/image1.png" class="image"/></a>
+        <a href="portfolio_folder\about.html" class="link"><img src="index_images/image2.png" class="image"/></a>
+        <a href="../form/eventRegistration.html" class="link"><img src="index_images/image3.png" class="image"/></a>
+        <a href="https://psychopomp3012.github.io/portfolio/file1/multiplicationTable.html" class="link"><img src="index_images/image4.png" class="image"/></a>
+        
+    </div>
 
     <script>
         const circle = document.getElementById("circle");
@@ -113,6 +203,51 @@
         }
 
         tick();
+
+        // scroll animation
+
+        const indexh1 = document.getElementsByClassName("index")[1];
+
+        window.addEventListener("scroll", () => {
+            if (pageYOffset > window.innerHeight/2) {
+                indexh1.classList.add("scrollFadeAnimationClass");
+                addClass("image", "scrollFadeAnimationClass");
+            }
+            else {
+                indexh1.classList.remove("scrollFadeAnimationClass");
+                removeClass("image", "scrollFadeAnimationClass");
+            }
+        });
+
+        // adds a class to a node list
+
+        function addClass(nodeClass, animationClass) {  
+
+            const nodeContainer = document.getElementsByClassName(nodeClass);
+
+            for (let i = 0; i < nodeContainer.length; i++) {
+                nodeContainer[i].classList.add(animationClass);
+            }
+
+        }
+
+        // removes a class from a node list
+
+        function removeClass(nodeClass, animationClass) {
+
+            const nodeContainer = document.getElementsByClassName(nodeClass);
+
+            for (let i = 0; i < nodeContainer.length; i++) {
+                nodeContainer[i].classList.remove(animationClass);
+            }
+
+        }
+        
+        
+        
+        
+
+        // scrollFadeAnimationClass
 
     </script>
 </body>
