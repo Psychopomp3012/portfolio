@@ -121,6 +121,18 @@ input[type="submit"]:hover, input[type="reset"]:hover {
     grid-template-columns: 300px 300px;
 }
 
+.TandC:link {
+    color: #e49550;
+}
+.TandC:visited {
+    color: #e49550;
+}
+.TandC:hover {
+    color: #338dba;
+}
+.TandC:active {
+    color: red;
+}
 /* This part is for a button that leads to multiplication table */
 
 .button {
@@ -159,4 +171,38 @@ span {
 .span1:after {
     content: "<<";
     color: rgb(205, 126, 9);
+}
+
+/* Loading screen */
+
+.preloader {
+    top: 0;
+    left: 0;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.75s, visibility 0.75s;
+    z-index: 1;
+}
+.preloader--hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+.preloader::after {
+    content: "";
+    width: 70px;
+    height: 70px;
+    border: 15px solid #dddddd;
+    border-top-color: #44cdfb;/*#009578;*/
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+
+@keyframes loading {
+    from { transform: rotate(0turn); }
+    to { transform: rotate(1turn); }
 }
