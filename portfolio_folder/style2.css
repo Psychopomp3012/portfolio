@@ -1,9 +1,14 @@
 * {
 
-    color: white;
     padding: 0;
     margin: 0;
 
+}
+
+body {
+    background-image: url("background_image.jpg"); /*3.(b)*/
+    overflow-x: hidden; 
+    background-color: aqua;
 }
 
 h3 {
@@ -16,6 +21,7 @@ h3 {
     position: relative;
     display: block;
     width: 100%;
+    color: white;
 }
 
 p {
@@ -24,6 +30,7 @@ p {
     padding: 30px;
     border-radius: 10px;
     box-shadow: 8px -8px 5px rgb(91, 108, 174);
+    color: white;
 
 }
 
@@ -115,11 +122,30 @@ p {
 
 }
 
+#others {
+    width: 100%;
+}
+
 ul {
     position: relative;
     left: 40%;
     padding: 50px;
     font-size: 24px;
+    display: inline-block;
+}
+
+ul > li > a:link {
+    color: white;
+}
+ul > li > a:visited {
+    color: rgb(190, 1, 247);
+}
+ul > li > a:hover {
+    color: rgb(238, 255, 0);
+    font-size: 28px;
+}
+ul > li > a:active {
+    color: red;
 }
 
 .button {
