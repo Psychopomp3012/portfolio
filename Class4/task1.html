@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rock-Paper-Scissor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            border: 2px solid black;
+        }
+
+        body.style1 {
+            background-color: #333333;
+            
+        }
+
+        body.style2 {
+            border: 2px solid black;
+            background-color: #333333;
+            display: flex;
+            justify-content: center;
+            min-width: 100vw;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        div.optionContainer {
+            margin: -40px 0px 0px 0px;
+            height: 100vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            /* border: 2px solid pink; */
+        }
+
+        div.icon {
+            width: 10rem;
+            height: 10rem;
+            display: block;
+            cursor: pointer;
+        }
+        div.iconResult {
+            width: 10rem;
+            height: 10rem;
+            border-radius: 50%;
+        }
+        div#rock {
+            background-color: red;
+        }
+
+        div#paper {
+            background-color: rgb(0, 102, 255);
+        } 
+        
+        div#scissor {
+            background-color: rgb(0, 255, 0);
+        }
+
+        div#rock, div#paper, div#scissor {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            
+        }
+
+        body.style1 div#rock:active, 
+        body.style1 div#paper:active, 
+        body.style1 div#scissor:active {
+            box-shadow: 0 0 0 30px #293251, 0 0 0 60px #232c4b, 0 0 0 100px #1e2949;
+            
+            animation: victor 2s ease 0s 1 normal forwards;
+            
+        }
+
+        @keyframes victor {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        i, div.icon {
+            border-radius: 100%;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            background-color: rgb(0, 183, 255);
+            
+        }
+
+        h1.result {
+            position: absolute;
+            top: 0px;
+        }
+
+        h2 {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0px 10px 0px;
+            background-color: rgb(0, 255, 251);
+        }
+
+        div.icon[class="icon"]:hover {
+            background-color: rgb(0, 255, 0);
+            font-size: 200px;
+        }
+
+        div.option-text {
+            text-align: center;
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        i.optionIcon:hover {
+            font-size: 110px;
+            transition-duration: 0.5s;
+        }
+
+        .resultContainer {
+            max-width: 1000px;
+            min-width: 600px;
+            margin: auto 0px auto 0px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            animation: victor 3s linear 0s 1 normal forwards;
+            /* animation-fill-mode: ; */
+        }
+
+        div.choices, div.optionResultContainer {
+            display: flex;
+        }
+        div.resultText {
+            /* background-color: aqua; */
+            font-family: cursive;
+            font-size: 38px;
+            font-weight: 800;
+            border: 2px solid orange;
+        }
+        div.choiceText {
+            font-family: monospace;
+            font-size: 32px;
+            font-weight: 800;
+            border: 2px solid salmon;
+            width: 100%;
+            text-align: center;
+        }
+
+        div.choices {
+            
+           width: 100%;
+            
+        }
+
+        div.optionResultContainer {
+            width: 100%;
+        }
+
+        div.optionResult {
+            border: 3px solid aqua;
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 0px 10px 0px;
+        }
+        div.winnerText {
+            border: 2px solid burlywood;
+            font-size: 29px;
+            font-weight: 800;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        }
+
+    </style>
+</head>
+
+<body class="style1">
+    <h1 id="heading">Rock-Paper-Scissor</h1>
+    <h2 id="instruction">Choose any one of the following:</h2>
+    <div class="optionContainer" id="optionContainer">
+        
+        <div class="option">
+            <div id="rock" class="icon">
+                <i class="fa-regular fa-hand-back-fist optionIcon"></i>
+            </div>
+            <div class="option-text">ROCK</div>
+        </div>
+        
+        <div class="option">
+            <div id="paper" class="icon">
+                <i class="fa-regular fa-hand optionIcon"></i>
+            </div>
+            <div class="option-text">PAPER</div>
+        </div>
+        <div class="option">
+
+            <div id="scissor" class="icon">
+                <i class="fa-regular fa-hand-scissors optionIcon"></i>
+            </div>
+            <div class="option-text">SCISSOR</div>
+        </div>
+        
+    </div>
+
+    <div class="resultContainer" id="resultContainer">
+        <div class="resultText">RESULT:</div>
+        <div class="choices">
+            <div class="choiceText">Player chose:</div>
+            <div class="choiceText">Computer chose:</div>
+        </div>
+        
+        <div class="optionResultContainer">
+            <div class="optionResult" id="optionResult1">
+                <!-- <div id="rock" class="iconResult">
+                    <i class="fa-regular fa-hand-back-fist"></i>
+                </div>
+                <div class="option-text" >ROCK</div> -->
+            </div>
+            
+            <div class="optionResult" id="optionResult2">
+                <!-- <div id="paper" class="iconResult">
+                    <i class="fa-regular fa-hand"></i>
+                </div>
+                <div class="option-text">PAPER</div> -->
+            </div>
+        </div>
+        <div class="winnerText" id="winner-Text">Winner: </div>
+    </div>
+    <script>
+        const resultLayout = document.getElementById("resultContainer");
+        document.body.removeChild(resultLayout);
+        const rockButton = document.getElementById("rock");
+        const paperButton = document.getElementById("paper");
+        const scissorButton = document.getElementById("scissor");
+        const h1 = document.getElementById("heading");
+        
+        
+        // let startCondition = 0;
+        let userInput = "", computerInput = "";
+
+        let playerCircle, computerCircle;
+        rockButton.addEventListener("click", () => {
+            userInput = "rock";
+            rockPaperScissorLogic(userInput);
+        });
+        paperButton.addEventListener("click", () => {
+            userInput = "paper";
+            rockPaperScissorLogic(userInput);
+        });
+        scissorButton.addEventListener("click", () => {
+            userInput = "scissor";
+            rockPaperScissorLogic(userInput);
+        });
+        function randomComputerInput() {
+            let randomNumber = Math.random() * 3; // from 0 to 3
+            if (randomNumber >= 0 && randomNumber < 1) {
+                computerInput = "rock";
+            }
+            else if (randomNumber >= 1 && randomNumber < 2) {
+                computerInput = "paper";
+            }
+            else if (randomNumber >= 2 && randomNumber <= 3) {
+                computerInput = "scissor"
+            }
+            return computerInput;
+        }
+        function rockPaperScissorLogic(userInput) {
+            
+            let winner = "", loser = "", drawCheck = 0;
+            computerInput = randomComputerInput();
+
+            playerCircle = document.getElementById(userInput);
+            computerCircle = document.getElementById(computerInput);
+
+            if (userInput == "rock") {
+                if (computerInput == "rock") {
+                    drawCheck = 1;
+                }
+                else if (computerInput == "paper") {
+                    winner = "Computer";
+                    loser = "Player";
+                }
+                else if (computerInput == "scissor") {
+                    winner = "Player";
+                    loser = "Computer";
+                }
+            }
+            else if (userInput == "paper") {
+                if (computerInput == "rock") {
+                    winner = "Player";
+                    loser = "Computer";
+                }
+                else if (computerInput == "paper") {
+                    drawCheck = 1;
+                }
+                else if (computerInput == "scissor") {
+                    winner = "Computer";
+                    loser = "Player";
+                }
+            }
+            else if (userInput == "scissor") {
+                if (computerInput == "rock") {
+                    winner = "Computer";
+                    loser = "Player";
+                }
+                else if (computerInput == "paper") {
+                    winner = "Player";
+                    loser = "Computer";
+                }
+                else if (computerInput == "scissor") {
+                    drawCheck = 1;
+                }
+            }
+            
+            styleClassChange(playerCircle, userInput, computerCircle);
+
+            // Last Result Text
+            const winnerText = document.getElementById("winner-Text");
+            if (drawCheck == 1) {
+                winnerText.innerHTML = "DRAW";
+            }
+            else {
+                // alert("Player: " + userInput + "\nComputer: " + computerInput + "\nWinner: " + winner + "\nLoser: " + loser);
+                winnerText.innerHTML += winner;
+            }
+        }
+
+        
+
+        function styleClassChange(playerCircle, userInput, computerCircle) {
+            h1.classList.add("result");
+            document.body.classList.remove("style1");
+            document.body.classList.add("style2");
+            let removalTag = document.getElementById("instruction");
+            let removalTag2 = document.getElementById("optionContainer");
+            
+            document.body.removeChild(removalTag);
+            document.body.removeChild(removalTag2);
+            document.body.appendChild(resultLayout);
+
+            let side1 = document.getElementById("optionResult1");
+            playerCircle.setAttribute("class", "iconResult");
+            let clone1 = playerCircle.cloneNode(true);
+            side1.appendChild(clone1);
+            var temp = document.createElement("div");
+            side1.appendChild(temp);
+            temp.setAttribute("class", "option-text");
+            temp.innerHTML = userInput;
+
+            
+
+            let side2 = document.getElementById("optionResult2");
+            computerCircle.setAttribute("class", "iconResult");
+            let clone2 = computerCircle.cloneNode(true);
+            side2.appendChild(clone2);
+            var temp2 = document.createElement("div");
+            side2.appendChild(temp2);
+            temp2.setAttribute("class", "option-text");
+            temp2.innerHTML = computerInput;
+
+            rockButton.removeEventListener("click", null);
+            paperButton.removeEventListener("click", null);
+            scissorButton.removeEventListener("click", null);
+        }
+        
+        
+        // let removalTag3 = document.getElementById("resultContainer");
+        
+        // document.body.removeChild(removalTag3);
+
+
+        // future work
+
+        let scoreCardArray = [];
+
+        function scoreCard() {
+
+        }
+
+        //animation
+
+
+    </script>
+</body>
+
+</html>
