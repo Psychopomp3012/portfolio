@@ -34,6 +34,8 @@
             background-color: #333333;
             display: flex;
             justify-content: center;
+            align-self: center;
+            /* flex-wrap:wrap; */
             min-width: 100vw;
             min-height: 100vh;
             overflow: hidden;
@@ -146,6 +148,9 @@
             min-width: 600px;
             margin: auto 0px auto 0px;
             display: flex;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
             flex-direction: column;
             text-align: center;
             animation: victor 3s linear 0s 1 normal forwards;
@@ -444,7 +449,8 @@
             
             document.body.removeChild(h2);
             document.body.removeChild(removalTag2);
-            document.body.appendChild(resultLayout);
+            // document.body.appendChild(resultLayout);
+            document.body.insertBefore(resultLayout, document.body.childNodes[2]);
 
             let side1 = document.getElementById("optionResult1");
             // playerCircle.setAttribute("class", "iconResult");
