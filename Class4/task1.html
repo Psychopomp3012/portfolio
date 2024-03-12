@@ -37,6 +37,7 @@
             min-width: 100vw;
             min-height: 100vh;
             overflow: hidden;
+            flex-direction: column;
         }
 
         div.optionContainer {
@@ -110,7 +111,7 @@
         }
 
         h1.result {
-            position: absolute;
+            position: relative;
             top: 0px;
         }
 
@@ -196,6 +197,58 @@
             font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
             background-color: var(--color5);
         }
+        div#replayHistory {
+            font-size: 40px;
+            display: flex;
+            justify-content: space-around;
+            /* border: 3px solid var(--color4); */
+        }
+        div#replay, 
+        div#record {
+            border: 3px solid var(--color4);
+            width: 100%;
+            padding: 10px 0px 10px 0px;
+            background-color: white;
+        }
+
+        div#replay:hover,
+        div#record:hover {
+            background-color: black;
+            color: white;
+            cursor: pointer;
+        }
+        div#recordPage {
+            background-color: white;
+            width: calc(80vw);
+            height: calc(60vh);
+            box-shadow: 8px 8px 15px white;
+            border-radius: 30px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: opacityChange 0.7s linear 0s 1 normal forwards;
+        }
+        div#closeButton {
+            font-size: 25px;
+            position: absolute;
+            right: 25px;
+            top: 20px;
+        }
+        div#closeButton:hover {
+            color: red;
+            cursor: pointer;
+        }
+
+
+        @keyframes opacityChange {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
 
     </style>
 </head>
@@ -237,33 +290,46 @@
         
         <div class="optionResultContainer">
             <div class="optionResult" id="optionResult1">
-                <!-- <div id="rock" class="iconResult">
-                    <i class="fa-regular fa-hand-back-fist"></i>
-                </div>
-                <div class="option-text" >ROCK</div> -->
+
             </div>
             
             <div class="optionResult" id="optionResult2">
-                <!-- <div id="paper" class="iconResult">
-                    <i class="fa-regular fa-hand"></i>
-                </div>
-                <div class="option-text">PAPER</div> -->
+                
             </div>
         </div>
         <div class="winnerText" id="winner-Text">Winner: </div>
+        <div id="replayHistory">
+            <div id="replay"><i class="fa-solid fa-rotate-right"></i></div>
+            <div id="record"><i class="fa-solid fa-clock"></i></div>
+        </div>
+        
+    </div>
+    <div id="recordPage">
+        <div id="closeButton">
+            <i class="fa-solid fa-circle-xmark"></i>
+        </div>  
+        
     </div>
     <script>
         //temp
-        // const resultLayout = document.getElementById("optionContainer");
-        // document.body.removeChild(resultLayout);
+        // const x = document.getElementById("optionContainer");
+        // document.body.removeChild(x);
         //temp
+        const optionLayout = document.getElementById("optionContainer");
         const resultLayout = document.getElementById("resultContainer");
+        const recordPage = document.getElementById("recordPage");
         document.body.removeChild(resultLayout);
+        document.body.removeChild(recordPage);
         const rockButton = document.getElementById("rock");
         const paperButton = document.getElementById("paper");
         const scissorButton = document.getElementById("scissor");
         const h1 = document.getElementById("heading");
+        const h2 = document.getElementById("instruction");
+
         
+        
+        let scoreCardArray = [];
+        let playerScore = 0, computerScore = 0, drawScore = 0;
         
         // let startCondition = 0;
         let userInput = "", computerInput = "";
@@ -295,6 +361,8 @@
             return computerInput;
         }
         function rockPaperScissorLogic(userInput) {
+
+            
             
             let winner = "", loser = "", drawCheck = 0;
             computerInput = randomComputerInput();
@@ -341,8 +409,19 @@
                     drawCheck = 1;
                 }
             }
+
+            scoreCard(userInput, computerInput, winner);  // initialize scoreCard
+            calculateScore(scoreCardArray);
+            console.log(scoreCardArray);
+            console.log(playerScore, computerScore, drawScore);
+
+            playerScore = computerScore = drawScore = 0;  // resetting the point
             
             styleClassChange(playerCircle, userInput, computerCircle);
+            const replay = document.getElementById("replay");
+            replay.addEventListener("click", reset);
+            const history = document.getElementById("record");
+            history.addEventListener("click", record);
 
             // Last Result Text
             const winnerText = document.getElementById("winner-Text");
@@ -351,7 +430,7 @@
             }
             else {
                 // alert("Player: " + userInput + "\nComputer: " + computerInput + "\nWinner: " + winner + "\nLoser: " + loser);
-                winnerText.innerHTML += winner;
+                winnerText.innerHTML = winner;
             }
         }
 
@@ -361,16 +440,16 @@
             h1.classList.add("result");
             document.body.classList.remove("style1");
             document.body.classList.add("style2");
-            let removalTag = document.getElementById("instruction");
             let removalTag2 = document.getElementById("optionContainer");
             
-            document.body.removeChild(removalTag);
+            document.body.removeChild(h2);
             document.body.removeChild(removalTag2);
             document.body.appendChild(resultLayout);
 
             let side1 = document.getElementById("optionResult1");
-            playerCircle.setAttribute("class", "iconResult");
+            // playerCircle.setAttribute("class", "iconResult");
             let clone1 = playerCircle.cloneNode(true);
+            clone1.setAttribute("class", "iconResult");
             side1.appendChild(clone1);
             var temp = document.createElement("div");
             side1.appendChild(temp);
@@ -380,8 +459,9 @@
             
 
             let side2 = document.getElementById("optionResult2");
-            computerCircle.setAttribute("class", "iconResult");
+            // computerCircle.setAttribute("class", "iconResult");
             let clone2 = computerCircle.cloneNode(true);
+            clone2.setAttribute("class", "iconResult");
             side2.appendChild(clone2);
             var temp2 = document.createElement("div");
             side2.appendChild(temp2);
@@ -401,10 +481,61 @@
 
         // future work
 
-        let scoreCardArray = [];
 
-        function scoreCard() {
+        
 
+
+        function reset() {
+            let side1 = document.getElementById("optionResult1");
+            let side2 = document.getElementById("optionResult2");
+            side1.innerHTML = "";
+            side2.innerHTML = "";
+            document.body.removeChild(resultLayout);
+            
+            // document.body.insertBefore(h2, document.body.childNodes[1]);
+            
+            document.body.classList.remove("style2");
+            document.body.classList.add("style1");
+            document.body.appendChild(h2);
+            document.body.appendChild(optionLayout);
+
+        }
+
+
+        //
+
+        
+
+        function record() {
+            // alert("hi");
+            document.body.appendChild(recordPage);
+            let closeButton = document.getElementById("closeButton");
+            closeButton.addEventListener("click", () => {
+                document.body.removeChild(recordPage);
+            })
+        }
+
+        
+
+        function scoreCard(userInput, computerCircle, winner) {
+            let scoreCard = {};
+            if (winner !== "") {
+                scoreCard["Player"] = userInput;
+                scoreCard["Computer"] = computerCircle;
+                scoreCard["Winner"] = winner;
+            }
+
+            scoreCardArray.push(scoreCard);
+            
+        }
+
+        function calculateScore(scoreCardArray) {
+
+            for (let i = 0; i < scoreCardArray.length; i++) {
+                if (scoreCardArray[i]["Winner"] === "Player") playerScore++;
+                else if (scoreCardArray[i]["Winner"] === "Computer") computerScore++;
+                else drawScore++;
+            }
         }
 
         //animation
