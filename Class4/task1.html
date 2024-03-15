@@ -7,6 +7,8 @@
     <title>rock-Paper-Scissor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Anta&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Madimi+One&display=swap');
+
         :root {
             --color1: #fd3f00;
             --color2: #F4CE14;
@@ -212,6 +214,7 @@
             cursor: pointer;
         }
         div#recordPage {
+            padding: 60px 0px 0px 0px;
             background-color: white;
             width: calc(80vw);
             height: calc(60vh);
@@ -266,12 +269,13 @@
 
         div#playIcon {
             font-size: 40px;
+            cursor: pointer;
         }
 
         div#playIcon:hover {
-            font-size: 50px;
-            cursor: pointer;
-            transition-duration: 0.5s;
+            animation-name: rotate;
+            animation-duration: 0.5s;
+            animation-timing-function: cubic-bezier(0.9, 0.001, 0.1, 0.5);
         }
 
         div#pauseIcon {
@@ -295,14 +299,24 @@
 
         div#soundIcon {
             font-size: 40px;
+            /* width: 480px; */
+            /* background-color: #00f2ff; */
+            /* padding: 0px 5px 0px 5px; */
         }
-        input#musicSlider {
+        div#sfxIcon {
+            /* width: 480px; */
+            font-size: 39px;
+            /* background-color: #00f2ff; */
+        }
+        input#musicSlider, 
+        input#sfxSlider {
             accent-color: black;
             width: 40vw;
             max-width: 300px;
             cursor: grab;
         }
-        input#musicSlider:active {
+        input#musicSlider:active,
+        input#sfxSlider:active {
             cursor: grabbing;
         }
         div#veil {
@@ -322,6 +336,101 @@
             text-align: center;
             margin: 30px 0px 0px 0px;
         }
+        p#music, p#sfx {
+            display: inline-block;
+            font-family: "Madimi One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+            /* margin: 0px 20px 0px 20px; */
+            /* background-color: red; */
+            min-width: 130px;
+        }
+        p#sfx, p#music {
+            margin: 0px 0px 0px 5px;
+        }
+        i#sfxID {
+            width: 40px; /* Both icon width are different */
+        }
+        i#sfxID:hover, i#musicID {
+            cursor: pointer;
+        }
+        div#play {
+            display: flex;
+            font-size: 24px;
+            font-family: "Madimi One", sans-serif;
+            font-weight: 400;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1;
+            width: 300px;
+            background-color: greenyellow;
+            border-radius: 10px;
+            /* background-color: red; */
+        }
+
+        div#play:hover {
+            background: radial-gradient(var(--color2) 10%, var(--color4));
+            box-shadow: 0px 0px 30px greenyellow;
+        }
+
+        .resumeTextAnimation {
+            animation-name: resumeTextAnimation;
+            animation-duration: 0.5s;
+            animation-fill-mode: forwards;
+        }
+
+        .playIconAnimation {
+            animation-name: rotate;
+            animation-duration: 0.5s;
+            animation-timing-function: cubic-bezier(0.9, 0.001, 0.1, 0.5);
+        }
+        p#resumeText {
+            font-size: 30px;
+            margin: 0px 0px 0px 10px;
+        }
+
+        div.record#record {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 10px 0px 10px 0px;
+            border: 3px solid var(--color4);
+            font-family: cursive;
+            font-size: 24px;
+            
+        }
+
+        div.record#record > p {
+            height: 100%;
+        }
+        
+
+        /* Animation */
+
+        @keyframes rotate {
+            from  {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes resumeTextAnimation {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                letter-spacing: 2px;
+            }
+            100% {
+                opacity: 3px;
+                letter-spacing: 3px;
+            }
+        }
+
+        
 
     </style>
 </head>
@@ -391,14 +500,23 @@
     </div>
 
     <div id="pauseMenu">
-        <div id="playIcon">
-            <i class="fa-solid fa-play"></i>
-        </div>
-        <div id="soundIcon">
-            <i class="fa-solid fa-music"></i>
-            <input type="range" id="musicSlider" min="0" max="1" step="0.1" value="0.5">
+        <div id="play">
+            <div id="playIcon">
+                <i class="fa-solid fa-play"></i>
+            </div>
+            <p id="resumeText">Resume</p>
         </div>
         
+        <div id="soundIcon">
+            <i class="fa-solid fa-music" id="musicID"></i>
+            <p id="music">Music:</p>
+            <input type="range" id="musicSlider" min="0" max="1" step="0.1" value="0.4">
+        </div>
+        <div id="sfxIcon">
+            <i class="fa-solid fa-volume-high" id="sfxID"></i>
+            <p id="sfx">SFX:</p>
+            <input type="range" id="sfxSlider" min="0" max="1" step="0.1" value="0.4">
+        </div>
     </div>
 
     <!-- Audio -->
@@ -411,10 +529,7 @@
     </audio>
 
     <script>
-        //temp
-        // const x = document.getElementById("optionContainer");
-        // document.body.removeChild(x);
-        //temp
+        
 
         // Compulsory Excecution in beginning
 
@@ -430,7 +545,7 @@
         
 
         //
-
+        const mouse = {x : 0, y : 0};
         
         const veil = document.getElementById("veil");
         const optionLayout = document.getElementById("optionContainer");
@@ -446,8 +561,19 @@
 
         const clickSound = document.getElementById("clickSound");
         const pauseButton = document.getElementById("pauseIcon");
+        const playButtonSection = document.getElementById("play");
         const playButton = document.getElementById("playIcon");
+        const resumeText = document.getElementById("resumeText");
         const pauseMenu = document.getElementById("pauseMenu");
+        const musicIcon = document.getElementById("musicID");
+        const sfxIcon = document.getElementById("sfxID");
+
+        //temp
+            // const x = document.getElementById("optionContainer");
+            // document.body.removeChild(x);
+            // document.body.removeChild(veil);
+            // document.body.appendChild(pauseMenu);
+        //temp
 
         removePauseMenu();
         
@@ -474,16 +600,46 @@
             rockPaperScissorLogic(userInput);
         });
         pauseButton.addEventListener("click", () => {
+            playClickSound();
             addPauseMenu();
             var musicSlider = document.getElementById("musicSlider");
+            var sfxSlider = document.getElementById("sfxSlider");
             musicSlider.addEventListener("input", () => {
                 gameMusic.volume = musicSlider.value;
             });
+            sfxSlider.addEventListener("input", () => {
+                clickSound.volume = sfxSlider.value;
+            });
         });
-        playButton.addEventListener("click", () => {
+        playButtonSection.addEventListener("click", () => {
+            playClickSound();
             removePauseMenu();
         });
-        
+        playButtonSection.addEventListener("mouseover", () => {
+            // alert("hi");
+            // play = document.getElementById("play");
+            // var x = document.createElement("p");
+            // x.textContent = "Resume";
+            // play.appendChild(x);
+            // animation-name: playButtonSectionAnimation;
+            // animation-duration: 5s;
+            // playButtonSection.style["background-color"] = "red";
+            // playButtonSection.classList.add("playButtonSectionAnimation");
+            playButton.classList.add("playIconAnimation");
+            resumeText.classList.add("resumeTextAnimation");
+        }); 
+        playButtonSection.addEventListener("mouseout", () => {
+            playButton.classList.remove("playIconAnimation");
+            resumeText.classList.remove("resumeTextAnimation");
+        });
+        musicIcon.addEventListener("click", () => {
+            playClickSound();
+            musicVolumeChange();
+        });
+        sfxIcon.addEventListener("click", () => {
+            playClickSound();
+            sfxVolumeChange();
+        });
 
         
         function randomComputerInput() {
@@ -649,21 +805,41 @@
             // alert("hi");
             playClickSound();
             document.body.appendChild(recordPage);
+            // clear recordPage
+
+            for (let i = 0; i < recordPage.children.length; i++) {
+                if (i != 0) recordPage.removeChild(recordPage.children[i]);
+            }
+
             let closeButton = document.getElementById("closeButton");
+
+            for (let i = 0; i < scoreCardArray.length; i++) {
+                currentScoreCard = scoreCardArray[i];
+                var x = document.createElement("div");
+                x.id = "record";
+                x.classList.add("record");
+                x.innerHTML = "<p>Player: " + currentScoreCard["Player"] + "</p><p>Computer: " + currentScoreCard["Computer"] + "</p><p>Winner: " + currentScoreCard["Winner"] + "</p>"; 
+                recordPage.appendChild(x);
+            }
+
+            
+
             closeButton.addEventListener("click", () => {
                 playClickSound();
                 document.body.removeChild(recordPage);
             })
         }
 
-        
 
         function scoreCard(userInput, computerCircle, winner) {
             let scoreCard = {};
+            scoreCard["Player"] = userInput;
+            scoreCard["Computer"] = computerCircle;
             if (winner !== "") {
-                scoreCard["Player"] = userInput;
-                scoreCard["Computer"] = computerCircle;
                 scoreCard["Winner"] = winner;
+            }
+            else {
+                scoreCard["Winner"] = "Draw";
             }
 
             scoreCardArray.push(scoreCard);
@@ -689,7 +865,7 @@
 
         function playGameMusic() {
             gameMusic = document.getElementById("gameMusic");
-            gameMusic.volume = 0.5;
+            gameMusic.volume = 0.4;
             // gameMusic.currentTime = 127;
             gameMusic.play();
             gameMusic.addEventListener("ended", () => { gameMusic.play() });
@@ -707,13 +883,29 @@
         // Music manipulation
 
         function musicVolumeChange() {
-            
+            musicSlider.value = (musicSlider.value != 0) ? 0 : 1;
+            gameMusic.volume = musicSlider.value;
         }
 
-        
+        function sfxVolumeChange() {
+            sfxSlider.value = (sfxSlider.value != 0) ? 0 : 1;
+            clickSound.volume = sfxSlider.value;
+        }
 
         //animation
 
+        function resumeTextAddAnimation() {
+            var x = document.createElement("p");
+            x.textContent = "Resume";
+            x.style.display = "inline-block";
+            x.id = "resumeText";
+            playButtonSection.appendChild(x);
+        }
+
+        function resumeTextRemoveAnimation() {
+            var resumeTextElement = document.getElementById("resumeText");
+            playButtonSection.removeChild(resumeTextElement);
+        }
 
     </script>
 </body>
