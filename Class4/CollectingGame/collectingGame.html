@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * {
             padding: 0;
@@ -11,27 +12,223 @@
         }
         body {
             display: flex;
-            justify-content: center;
+            /* justify-content:center; */
             align-items: center;
+            flex-direction: column;
+            /* flex-wrap: wrap; */
             width: 100vw;
             height: 100vh;
-            overflow: hidden;
+            /* overflow: hidden; */
+            background-color: black;
         }
         #gameCanvas {
             width: 600px;
             height: 600px;
-            border: 3px solid rgb(0, 255, 238);
+            border: 3px solid rgb(204, 0, 255);;
+            background-color: white;
+            box-shadow: 0px 0px 30px deepskyblue;
         }
+
+        #canvasContainer {
+            flex-grow: 4;
+            /* border: 3px solid aquamarine; */
+        }
+
+        /* Veil */
+        div#veil {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100vw;
+            height: 100vh;
+            background-color: black;
+            transition-duration: 5s;
+            
+            z-index: 1;
+            
+
+            animation-name: veilAnimation;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+            animation-fill-mode: backwards;
+            animation-timing-function: linear;
+        }
+        div#veil > p {
+            color: white;
+            font-size: 24px;
+            font-family: monospace;
+            width: fit-content;
+            /* display: inline-block; */
+            /* text-align: center; */
+            margin: 30px 0px 0px 0px;
+            animation-name: veilParagraphAnimation;
+            animation-duration: 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes veilAnimation {
+            from {
+                background: linear-gradient(blue, rgb(255, 0, 191));
+                
+            }
+            to {
+                background: linear-gradient(red, yellow);
+                
+            }
+        }
+
+        @keyframes veilParagraphAnimation {
+            from {
+                margin: 30px 0px 0px 0px;
+                color: white;
+                
+            }
+
+            to {
+                margin: 30px 0px 0px 3em;
+                color: black;
+            }
+        }
+        /* Veil */
+
+        /* PauseMenu */
+
+        div#pauseMenu {
+            width: 80vw;
+            height: 60vh;
+            background: radial-gradient(rgb(246, 255, 0), rgb(204, 0, 255) 130%);
+            border-radius: 20px;
+            box-shadow: 0px 0px 30px deeppink;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        div#playButton {
+
+        }
+
+        div#playButton:hover {
+            cursor: pointer;
+            animation-name: playButtonAnimation;
+            animation-duration: 0.5s;
+            animation-timing-function: cubic-bezier(0.9, 0.001, 0.1, 0.5);
+        }
+
+        @keyframes playButtonAnimation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* PauseMenu */
+
+        /* PauseButton */
+
+        div#pauseButtonContainer {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            flex-grow: 1;
+        }
+
+        div#pauseButton {
+            color: white;
+            font-size: 45px;
+            width: 50px;
+            margin: 20px 30px 0px 0px;    
+        }
+
+        div#pauseButton:hover {
+            cursor: pointer;
+            color: rgb(204, 0, 255);
+            
+        }
+
+        i.fa-circle-pause {
+            border: 3px solid transparent;
+        }
+        i.fa-circle-pause:hover {
+            animation-name: pauseButtonAnimation;
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes pauseButtonAnimation {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+                font-size: 50px;
+                box-shadow: 0px 0px 10px deepskyblue;
+            }
+        }
+
+        /* PauseButton */
         
     </style>
 </head>
 <body>
+    <div id="veil">
+        <p>Click! anywhere on the Screen to --&gtSTART&lt--</p>
+    </div>
 
-    <canvas id="gameCanvas"></canvas>
+    <div id="pauseButtonContainer">
+        <div id="pauseButton">
+            <i class="fa-solid fa-circle-pause"></i>
+        </div>
+    </div>
+    <div id="canvasContainer">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    
+    <div id="pauseMenu">
+        <div id="playButton">
+            <i class="fa-solid fa-play"></i>
+        </div>
+        <div id="restartButton">
+
+        </div>
+        <div id="sfxButton">
+            <i class="fa-solid fa-volume-high"></i>
+            <i class="fa-solid fa-volume-low"></i>
+            <i class="fa-solid fa-volume-off"></i>
+            <i class="fa-solid fa-volume-xmark"></i>
+        </div>
+    </div>
+    
     
     <script>
 
+        const canvasContainer = document.getElementById("canvasContainer");
         const CANVAS = document.getElementById("gameCanvas");
+        const veil = document.getElementById("veil");
+        const pauseButton = document.getElementById("pauseButton");
+        const playButton = document.getElementById("playButton");
+        const pauseMenu = document.getElementById("pauseMenu");
+        //Temp
+
+        // document.body.removeChild(canvasContainer);
+        // document.body.removeChild(veil);
+        // document.body.removeChild(pauseMenu);
+
+        //temp
+
+        document.body.removeChild(canvasContainer);
+        document.body.removeChild(pauseMenu);
+
+
         const CANVAS_WIDTH = CANVAS.width = 600;
         const CANVAS_HEIGHT = CANVAS.height = 600;
 
@@ -39,8 +236,25 @@
 
         let fallingObjectArray = [];
         let score = 0;
+        var timeOfGame = 0;
+        var chunk = 0, prevChunk = 0;
+        var gameOverFlag = 0;
 
+        // Event Listeners
 
+        veil.addEventListener("click", () => {
+            document.body.removeChild(veil);
+            document.body.appendChild(canvasContainer);
+            reset();
+        });
+        pauseButton.addEventListener("click", () => {
+            document.body.appendChild(pauseMenu);
+        });
+        playButton.addEventListener("click", () => {
+            document.body.removeChild(pauseMenu);
+        });
+
+        // Classes
 
         class FallingObject {
 
@@ -49,7 +263,7 @@
                 this.height = 15;
                 this.x = Math.floor(Math.random() * (CANVAS_WIDTH - this.width));
                 this.y = 0 - this.height;
-                this.speed = 5;
+                this.speed = 1;
                 this.color = randomColourGenerator();
                 this.deleteMarker = false;
             }
@@ -63,19 +277,28 @@
 
             update() {
                 this.y += this.speed;
+                // console.log(this.speed);
 
                 if (this.y >= CANVAS_HEIGHT) {
+                    // this.deleteMarker = true;
+                    // clearTimeout(time);
+                    // clearTimeout(globalTime);
+                    // chunk = 0;
+                    // fallingObjectArray.forEach(obj => {
+                    //     obj.speed = 0; // freezes the falling objects
+                    // });
+                    
+                    // console.log("timeout");
                     this.deleteMarker = true;
-                    clearTimeout(time);
-                    console.log("timeout");
+                    gameOver();
                     // gameover
                 } 
                 
             }
 
             isInside(player) {
-                // wrt x-axis
-                var verticallyInline = (this.x > player.x) && ((this.x + this.width) < (player.x + player.width))
+                // wrt x-axis till 30% of box is considered inside
+                var verticallyInline = (this.x >= (player.x - 0.7 * this.width)) && ((this.x + 0.3*this.width) <= (player.x + player.width));
 
                 // wrt y-axis just above the box/player
                 var horizontallyInline = ((player.y - (this.y + this.height)) < 10) && ((this.y + this.height) < (player.y));
@@ -87,11 +310,19 @@
                     // console.log(this.y + this.height, player.y);
                     score++;
                     this.deleteMarker = true;
-                    console.log(score);
+                    // console.log(score);
                 }
                 else {
                     
                 }
+            }
+
+            speedChange() {
+                // speed update based on time
+
+                if(this.chunk != 0 && gameOverFlag == 0)this.speed = chunk;
+                // console.log(this.speed, chunk);
+                
             }
 
         }
@@ -99,10 +330,11 @@
         class Player {
             constructor() {
                 this.width = 100;
-                this.height = 50;
+                this.height = 30;
                 this.x = 0.5 * (CANVAS_WIDTH - this.width);
                 this.y = CANVAS_HEIGHT - 1.5 * this.height;
                 this.speedX = 0;
+                this.changeSpeedX = 10;
             }
 
             draw() {
@@ -132,6 +364,14 @@
                 context.strokeText("Score: " + score, 10, 50);
                 // ctx.textAlign = "center";
             }
+
+            speedChange() {
+                // speed update based on time
+                
+                if(this.chunk != 0)this.changeSpeedX = (5 + chunk);
+                
+                // console.log(this.speedX);
+            }
         }
 
         // Event Listeners
@@ -140,11 +380,11 @@
             let input = event.key;
             // console.log(input);
             if (["ArrowRight", "d", "D"].indexOf(input) != -1) {
-                player.speedX = 10;
+                player.speedX = player.changeSpeedX;
             }
 
             else if (["ArrowLeft", "a", "A"].indexOf(input) != -1) {
-                player.speedX = -10;
+                player.speedX = -player.changeSpeedX;
             }                    
             
         });
@@ -158,27 +398,50 @@
         // Objects
 
         player = new Player();
-        fallingObject = new FallingObject();
+        // fallingObject = new FallingObject();
 
         // functions
 
-        var time = setInterval(timeBasedEnemy, 1000);
+        var globalTime; // A clock for the game
+        var time;
 
         function animate() {
             context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             player.draw();
             player.update();
             player.displayScore();
-            
+            player.speedChange();
 
             fallingObjectArrayFunction(player);
 
+            // console.log(fallingObjectArray);
       
 
             requestAnimationFrame(animate);
         }
 
         animate();
+
+        function gameOver() {
+            
+            clearInterval(time);
+            clearInterval(globalTime);
+            chunk = 0;
+            fallingObjectArray.forEach(obj => {
+                obj.speed = 0; // freezes the falling objects
+            });
+                    
+            console.log("timeout");
+        }
+
+        function reset() {
+            fallingObjectArray = [];
+            player = new Player();
+            globalTime = setInterval(timer, 1000);
+            time = setInterval(timeBasedEnemy, 1000);
+
+            console.log("reset");
+        }
 
         function fallingObjectArrayFunction(player) {
             
@@ -187,6 +450,7 @@
                 fallingObject.draw();
                 fallingObject.update();
                 fallingObject.isInside(player);
+                fallingObject.speedChange();
                 // console.log(fallingObjectArray);
             });
             
@@ -194,10 +458,16 @@
 
         function timeBasedEnemy() {
             fallingObjectArray.push(new FallingObject());
-            console.log(fallingObjectArray);
+            // console.log(fallingObjectArray);
         }
 
         
+        function timer() {
+            interval = 7;
+            timeOfGame++;
+            chunk = 5 + Math.floor(timeOfGame / interval);
+        }
+
 
         function randomColourGenerator() {
             var colorArray = [
@@ -210,6 +480,9 @@
                 "purple",
                 "violet",
                 "brown",
+                "indigo",
+                "lime",
+                "olive",
                 "yellow"
             ];
 
