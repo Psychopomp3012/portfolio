@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #gameCanvas {
+            width: 600px;
+            height: 600px;
+            border: 3px solid rgb(0, 255, 238);
+        }
+        
+    </style>
+</head>
+<body>
+
+    <canvas id="gameCanvas"></canvas>
+    
+    <script>
+
+        const CANVAS = document.getElementById("gameCanvas");
+        const CANVAS_WIDTH = CANVAS.width = 600;
+        const CANVAS_HEIGHT = CANVAS.height = 600;
+
+        const context = CANVAS.getContext("2d");
+
+        let fallingObjectArray = [];
+        let score = 0;
+
+
+
+        class FallingObject {
+
+            constructor() {
+                this.width = 15;
+                this.height = 15;
+                this.x = Math.floor(Math.random() * (CANVAS_WIDTH - this.width));
+                this.y = 0 - this.height;
+                this.speed = 5;
+                this.color = randomColourGenerator();
+                this.deleteMarker = false;
+            }
+
+            draw() {
+                context.save();
+                context.fillStyle = this.color;
+                context.fillRect(this.x, this.y, this.width, this.height);
+                context.restore();
+            }
+
+            update() {
+                this.y += this.speed;
+
+                if (this.y >= CANVAS_HEIGHT) {
+                    this.deleteMarker = true;
+                    clearTimeout(time);
+                    console.log("timeout");
+                    // gameover
+                } 
+                
+            }
+
+            isInside(player) {
+                // wrt x-axis
+                var verticallyInline = (this.x > player.x) && ((this.x + this.width) < (player.x + player.width))
+
+                // wrt y-axis just above the box/player
+                var horizontallyInline = ((player.y - (this.y + this.height)) < 10) && ((this.y + this.height) < (player.y));
+
+                
+                if(verticallyInline && horizontallyInline) {
+                    // clearInterval(time);
+                    // console.log(verticallyInline, horizontallyInline, player);
+                    // console.log(this.y + this.height, player.y);
+                    score++;
+                    this.deleteMarker = true;
+                    console.log(score);
+                }
+                else {
+                    
+                }
+            }
+
+        }
+
+        class Player {
+            constructor() {
+                this.width = 100;
+                this.height = 50;
+                this.x = 0.5 * (CANVAS_WIDTH - this.width);
+                this.y = CANVAS_HEIGHT - 1.5 * this.height;
+                this.speedX = 0;
+            }
+
+            draw() {
+                // this.fillStyle = "black";
+                context.fillRect(player.x, player.y, player.width, player.height);
+            }
+
+            update() {
+                this.x += this.speedX;
+
+                // constraints
+
+                if (this.x >= CANVAS_WIDTH - this.width) this.x = CANVAS_WIDTH - this.width;
+                else if (this.x < 0) this.x = 0;
+
+                
+            }
+            
+
+            onGround() {
+                return this.y >= CANVAS_HEIGHT - this.height;
+            }
+
+            displayScore() {
+                context.font = "30px Arial";
+                // ctx.fillText("Hello World", 10, 50);
+                context.strokeText("Score: " + score, 10, 50);
+                // ctx.textAlign = "center";
+            }
+        }
+
+        // Event Listeners
+
+        document.addEventListener("keydown", (event) => {
+            let input = event.key;
+            // console.log(input);
+            if (["ArrowRight", "d", "D"].indexOf(input) != -1) {
+                player.speedX = 10;
+            }
+
+            else if (["ArrowLeft", "a", "A"].indexOf(input) != -1) {
+                player.speedX = -10;
+            }                    
+            
+        });
+
+        document.addEventListener("keyup", (event) => {
+            let input = event.key;
+            // console.log(input);
+            player.speedX = 0;
+        });
+
+        // Objects
+
+        player = new Player();
+        fallingObject = new FallingObject();
+
+        // functions
+
+        var time = setInterval(timeBasedEnemy, 1000);
+
+        function animate() {
+            context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            player.draw();
+            player.update();
+            player.displayScore();
+            
+
+            fallingObjectArrayFunction(player);
+
+      
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        function fallingObjectArrayFunction(player) {
+            
+            fallingObjectArray = fallingObjectArray.filter((fallingObject) => !fallingObject.deleteMarker);
+            fallingObjectArray.forEach(fallingObject => {
+                fallingObject.draw();
+                fallingObject.update();
+                fallingObject.isInside(player);
+                // console.log(fallingObjectArray);
+            });
+            
+        }
+
+        function timeBasedEnemy() {
+            fallingObjectArray.push(new FallingObject());
+            console.log(fallingObjectArray);
+        }
+
+        
+
+        function randomColourGenerator() {
+            var colorArray = [
+                "red",
+                "green",
+                "blue",
+                "aqua",
+                "aquamarine",
+                "orange",
+                "purple",
+                "violet",
+                "brown",
+                "yellow"
+            ];
+
+            var index = Math.floor(Math.random() * colorArray.length);
+            resultString = colorArray[index];
+            return resultString;
+        }
+
+    </script>
+    
+</body>
+</html>
