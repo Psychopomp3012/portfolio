@@ -27,6 +27,7 @@
             border: 3px solid rgb(204, 0, 255);;
             background-color: white;
             box-shadow: 0px 0px 30px deepskyblue;
+            
         }
 
         #canvasContainer {
@@ -43,51 +44,52 @@
             height: 100vh;
             background-color: black;
             transition-duration: 5s;
-            
-            z-index: 1;
+            color: white;
             
 
             animation-name: veilAnimation;
-            animation-duration: 3s;
+            animation-duration: 1s;
             animation-iteration-count: infinite;
-            animation-fill-mode: backwards;
             animation-timing-function: linear;
+            animation-direction: alternate;
+            z-index: 3;
         }
         div#veil > p {
-            color: white;
             font-size: 24px;
             font-family: monospace;
             width: fit-content;
-            /* display: inline-block; */
-            /* text-align: center; */
+            position: absolute;
             margin: 30px 0px 0px 0px;
             animation-name: veilParagraphAnimation;
             animation-duration: 3s;
             animation-iteration-count: 1;
             animation-fill-mode: forwards;
+            
         }
 
         @keyframes veilAnimation {
             from {
                 background: linear-gradient(blue, rgb(255, 0, 191));
+                color: white;
                 
             }
             to {
                 background: linear-gradient(red, yellow);
-                
+                color: black;
             }
         }
 
         @keyframes veilParagraphAnimation {
             from {
-                margin: 30px 0px 0px 0px;
-                color: white;
+                left: 0px;
+                /* color: white; */
                 
             }
 
             to {
-                margin: 30px 0px 0px 3em;
-                color: black;
+                left: 50%;
+                transform: translateX(-50%);
+                /* color: black; */
             }
         }
         /* Veil */
@@ -96,6 +98,8 @@
 
         div#pauseMenu {
             width: 80vw;
+            max-width: 700px;
+            max-height: 300px;
             height: 60vh;
             background: radial-gradient(rgb(246, 255, 0), rgb(204, 0, 255) 130%);
             border-radius: 20px;
@@ -107,27 +111,123 @@
             font-size: 40px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-evenly;
             align-items: center;
+
+            animation-name: pauseMenuAnimation;
+            animation-duration: 1s;
+        }
+
+        @keyframes pauseMenuAnimation {
+            from {
+                top: 0%;
+            }
+            to {
+                top: 50%;
+            }
         }
         div#playButton {
+            max-width: 300px;
+            min-width: 220px;
+            min-height: 50px;
+            width: 30vw;
+            height: 8vh;
+            border: 2px solid rgb(204, 0, 255);
+            display: flex;
+            border-radius: 10px;
+            background-color: rgb(204, 0, 255);
+            
+        }
 
+        i.fa-solid.fa-play {
+            padding-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            /* border: 3px solid rgb(204, 0, 255); */
         }
 
         div#playButton:hover {
             cursor: pointer;
-            animation-name: playButtonAnimation;
-            animation-duration: 0.5s;
-            animation-timing-function: cubic-bezier(0.9, 0.001, 0.1, 0.5);
+            
         }
 
-        @keyframes playButtonAnimation {
+        div#playButton > p {
+            flex-grow: 3;
+            /* border: 3px solid rgb(204, 0, 255); */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 10px;
+            /* border: 3px solid black; */
+        }
+
+        .rotateAnimation {
+            animation-name: rotateAnimation;
+            animation-duration: 0.5s;
+            animation-timing-function: cubic-bezier(0.9, 0.001, 0.1, 0.5);
+            font-size: 43px;
+            /* background-color: rgb(204, 0, 255); */
+        }
+
+        /* i.fa-solid.fa-play:hover {
+            
+        } */
+
+        @keyframes rotateAnimation {
             from {
                 transform: rotate(0deg);
             }
             to {
                 transform: rotate(360deg);
             }
+        }
+
+        div#restartButton {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            border: 3px solid black;
+
+            max-width: 300px;
+            min-width: 220px;
+            min-height: 50px;
+            width: 30vw;
+            height: 8vh;
+            /* border: 2px solid rgb(204, 0, 255); */
+            
+            border-radius: 10px;
+            background-color: rgb(204, 0, 255);
+        }
+
+        div#restartButton:hover {
+            cursor: pointer;
+        }
+
+        div#restartButton > p {
+            flex-grow: 3;
+            /* border: 3px solid rgb(204, 0, 255); */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding-left: 10px;
+            /* border: 3px solid black; */
+        }
+
+        i.fa-solid.fa-rotate-right {
+            /* padding-left: 10px; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            /* border: 3px solid rgb(204, 0, 255); */
+        }
+
+        div#sfxButton > input[type="range"] {
+            accent-color: black;
+            /* min-width: 300px; */
+            width: 20vw;
         }
 
         /* PauseMenu */
@@ -139,6 +239,7 @@
             justify-content: flex-end;
             width: 100%;
             flex-grow: 1;
+            z-index: 1;
         }
 
         div#pauseButton {
@@ -176,6 +277,38 @@
         }
 
         /* PauseButton */
+
+        /* Touch Buttons */
+
+        #leftTouchButton, #rightTouchButton {
+            width: 50%;
+            height: 100%;
+            opacity: 1;
+            background-color: green;
+            /* position: relative; */
+            /* z-index: 1; */
+        }  
+
+        /* #leftTouchButton:hover, #rightTouchButton:hover {
+            letter-spacing: 6px;
+            background: #1e9bff;
+            box-shadow: 0px 0px 30px #1e9bff;
+            cursor: pointer;
+        }   */
+
+        #touchButtonContainer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: red;
+            opacity: 0;
+            display: flex;
+            /* z-index: -1; */
+        }
+
+        /* Touch Buttons */
         
     </style>
 </head>
@@ -189,24 +322,44 @@
             <i class="fa-solid fa-circle-pause"></i>
         </div>
     </div>
+
+    <!--  -->
+    <div id="touchButtonContainer">
+        <a id="leftTouchButton"></a>
+        <a id="rightTouchButton"></a>
+    </div>
+    
+    <!--  -->
+
     <div id="canvasContainer">
         <canvas id="gameCanvas"></canvas>
     </div>
+
+    
     
     <div id="pauseMenu">
         <div id="playButton">
-            <i class="fa-solid fa-play"></i>
+            <i class="fa-solid fa-play" id="playButtonIcon"></i>
+            <p>Resume</p>
         </div>
         <div id="restartButton">
-
+            <i class="fa-solid fa-rotate-right" id="restartButtonIcon"></i>
+            <p>Reload</p>
         </div>
         <div id="sfxButton">
-            <i class="fa-solid fa-volume-high"></i>
-            <i class="fa-solid fa-volume-low"></i>
-            <i class="fa-solid fa-volume-off"></i>
-            <i class="fa-solid fa-volume-xmark"></i>
+            <i class="fa-solid fa-volume-high" id="volumeIconButton"></i>
+            <input type="range" min="0" max="1" step="0.1" value="0.5" id="musicSlider">
+            <!-- <i class="fa-solid fa-volume-low"></i> -->
+            <!-- <i class="fa-solid fa-volume-off"></i> -->
+            <!-- <i class="fa-solid fa-volume-xmark"></i> -->
         </div>
     </div>
+
+    <!-- Audio -->
+
+    <audio id="collectingGameMusic1">
+        <source src="New folder/collectingGame.mp3" type="audio/mp3">
+    </audio>
     
     
     <script>
@@ -216,7 +369,14 @@
         const veil = document.getElementById("veil");
         const pauseButton = document.getElementById("pauseButton");
         const playButton = document.getElementById("playButton");
+        const playButtonIcon = document.getElementById("playButtonIcon");
+        const restartButton = document.getElementById("restartButton");
+        const restartButtonIcon = document.getElementById("restartButtonIcon");
         const pauseMenu = document.getElementById("pauseMenu");
+        const leftTouchButton = document.getElementById("leftTouchButton");
+        const rightTouchButton = document.getElementById("rightTouchButton");
+
+        
         //Temp
 
         // document.body.removeChild(canvasContainer);
@@ -237,8 +397,9 @@
         let fallingObjectArray = [];
         let score = 0;
         var timeOfGame = 0;
-        var chunk = 0, prevChunk = 0;
+        var chunk = 0;
         var gameOverFlag = 0;
+        var audioObject;
 
         // Event Listeners
 
@@ -246,15 +407,83 @@
             document.body.removeChild(veil);
             document.body.appendChild(canvasContainer);
             reset();
+
+            // Audio
+
+            audioObject = new GameAudio("collectingGameMusic1");
+            
+            // console.log(audioObject.audio);
+            
         });
         pauseButton.addEventListener("click", () => {
+            console.log(gameOverFlag);
+            if (gameOverFlag == 0) pause();
             document.body.appendChild(pauseMenu);
+
+            // Audio
+
+            audioObject.icon.addEventListener("click", () => {
+                audioObject.audio.volume = (audioObject.audio.volume != 0) ? 0 : 1;
+            });
+            // icon, inputElement, audio
+
         });
         playButton.addEventListener("click", () => {
             document.body.removeChild(pauseMenu);
+            resume();
+        });
+        playButton.addEventListener("mouseover", () => {
+            playButtonIcon.classList.add("rotateAnimation");
+        });
+        playButton.addEventListener("mouseout", () => {
+            playButtonIcon.classList.remove("rotateAnimation");
+        });
+
+        restartButton.addEventListener("click", () => {
+            document.body.removeChild(pauseMenu);
+            reset();
+        });
+        restartButton.addEventListener("mouseover", () => {
+            restartButtonIcon.classList.add("rotateAnimation");
+            
+        });
+        restartButton.addEventListener("mouseout", () => {
+            restartButtonIcon.classList.remove("rotateAnimation");
         });
 
         // Classes
+
+        // Audio Related 
+
+        // <!-- <i class="fa-solid fa-volume-low"></i> -->
+        //     <!-- <i class="fa-solid fa-volume-off"></i> -->
+        //     <!-- <i class="fa-solid fa-volume-xmark"></i> -->
+
+        class GameAudio {
+            constructor(audioID) {
+                this.audio = document.getElementById(audioID);
+                this.inputElement = document.getElementById("musicSlider");
+                // this.icon = document.getElementById("volumeIconButton");
+                this.audio.volume = 0.5;
+                // this.audio.currentTime = 155;
+                this.audio.play();
+
+                this.audio.addEventListener('ended', () => {
+                    this.audio.currentTime = 0; // Reset playback to the beginning
+                    this.audio.play(); // Restart playback
+                });
+            }
+
+            play() {
+                this.audio.play();
+            }
+            audioVolumeChange() {  
+                this.audio.volume = this.inputElement.value;
+            }
+            
+        }
+
+        
 
         class FallingObject {
 
@@ -263,7 +492,7 @@
                 this.height = 15;
                 this.x = Math.floor(Math.random() * (CANVAS_WIDTH - this.width));
                 this.y = 0 - this.height;
-                this.speed = 1;
+                this.speed = 5;
                 this.color = randomColourGenerator();
                 this.deleteMarker = false;
             }
@@ -293,6 +522,8 @@
                     gameOver();
                     // gameover
                 } 
+
+                console.log(this.speed);
                 
             }
 
@@ -321,6 +552,8 @@
                 // speed update based on time
 
                 if(this.chunk != 0 && gameOverFlag == 0)this.speed = chunk;
+            
+                
                 // console.log(this.speed, chunk);
                 
             }
@@ -376,6 +609,26 @@
 
         // Event Listeners
 
+        leftTouchButton.addEventListener("touchstart", () => {
+            player.speedX = -player.changeSpeedX;
+            console.log("touch");
+        });
+
+        leftTouchButton.addEventListener("touchend", () => {
+            player.speedX = 0;
+            console.log("touch");
+        })
+
+        rightTouchButton.addEventListener("touchstart", () => {
+            player.speedX = player.changeSpeedX;
+            console.log("touch");
+        });
+
+        rightTouchButton.addEventListener("touchend", () => {
+            player.speedX = 0;
+            console.log("touch");
+        });
+
         document.addEventListener("keydown", (event) => {
             let input = event.key;
             // console.log(input);
@@ -406,6 +659,9 @@
         var time;
 
         function animate() {
+
+            // audioVolumeChange();
+
             context.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             player.draw();
             player.update();
@@ -422,25 +678,68 @@
 
         animate();
 
-        function gameOver() {
-            
+        function pause() {
+            tempTimeOfGame = timeOfGame;
+            tempChunk = chunk;
+            timeOfGame = 0;
+            chunk = 0;
+            fallingObjectArray.forEach(obj => {
+                obj.speed = 0; // freezes the falling objects
+            });
+
             clearInterval(time);
             clearInterval(globalTime);
+
+            console.log("pause");
+
+        }
+
+        var tempTimeOfGame;
+        var tempChunk;
+
+        function resume() {
+            timeOfGame = tempTimeOfGame;
+            chunk = tempChunk;
+
+            globalTime = setInterval(timer, 1000);
+            time = setInterval(timeBasedEnemy, 2000);
+
+            console.log(timeOfGame, chunk);
+        }
+
+        
+
+        function gameOver() {
+
+            console.log(timeOfGame, chunk);
+            gameOverFlag = 1;
+            timeOfGame = 0;
             chunk = 0;
+            clearInterval(time);
+            clearInterval(globalTime);
+            // chunk = 0;
             fallingObjectArray.forEach(obj => {
                 obj.speed = 0; // freezes the falling objects
             });
                     
             console.log("timeout");
+            document.body.appendChild(pauseMenu);
+            pauseMenu.removeChild(playButton);
         }
 
         function reset() {
+            gameOverFlag = 0;
+            timeOfGame = 0;
+            chunk = 0;
             fallingObjectArray = [];
             player = new Player();
+            clearInterval(globalTime);
+            clearInterval(time);
             globalTime = setInterval(timer, 1000);
-            time = setInterval(timeBasedEnemy, 1000);
-
+            time = setInterval(timeBasedEnemy, 2000);
+            score = 0;
             console.log("reset");
+            pauseMenu.insertBefore(playButton, pauseMenu.children[0]);
         }
 
         function fallingObjectArrayFunction(player) {
@@ -490,6 +789,10 @@
             resultString = colorArray[index];
             return resultString;
         }
+
+        
+        
+        
 
     </script>
     
