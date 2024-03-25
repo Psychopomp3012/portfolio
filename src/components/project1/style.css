@@ -1,0 +1,55 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: wheat;
+    text-align: center;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid white;
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper button {
+    padding: 10px 20px 10px 20px;
+    font-weight: bold;
+    font-size: 20px;
+    background-color: black;
+    color: wheat;
+    margin: 0px 0px 10px 0px;
+    cursor: pointer;
+}
+
+.accordian {
+    width: 600px;
+}
+
+.item {
+    background-color: rgb(18, 235, 255);
+    border: 3px solid black;
+    margin: 0px 0px 10px 0px;
+    padding: 30px 20px 30px 20px;
+}
+
+.question {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    
+}
+
+.answer {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    margin: 10px 0px 0px 0px;
+}
